@@ -6,8 +6,7 @@ import { writeVersion } from './utils/firebaseUtils';
 function App() {
   const {state} = useContext(AppContext);
 
-  const onPressDone = () => {
-    console.log('here')
+  const onClickDone = () => {
     writeVersion();
   }
 
@@ -37,19 +36,17 @@ function App() {
             <li>
               <div>
                 <h2>Mark</h2>
-                <button onClick={() => {
-                  alert('213')
-                }}>Done</button>
+                <button>Done</button>
               </div>
             </li>
             <li>
               <div>
                 <h2>Mark</h2>
-                <button>Done</button>
+                <button onClick={onClickDone}>Done</button>
               </div>
             </li>
           </ul>
-        <b>{state.version}</b>
+        <i>{state.version}</i>
         </div>
       </div>
       <div className="input-group">

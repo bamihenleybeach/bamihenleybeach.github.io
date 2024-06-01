@@ -19,9 +19,10 @@ const readVersion = (onValueChange) => {
 }
 
 const writeVersion = () => {
- return set(ref(db,'settings', {
-  version: 'v0.1.1'
- }));
+ return set(
+   ref(db, "settings"), {
+     version: new Date().toISOString(),
+   });
 }
 
 export {
