@@ -106,6 +106,9 @@ ul li {
   padding: 18px;
   border-bottom: 1px solid gray;
 }
+ul li:last-child {
+  border-bottom: none;
+}
 
 ul.doing li button {
   background: orange;
