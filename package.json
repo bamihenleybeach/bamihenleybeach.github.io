@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "http://bamihenleybeach.github.io",
   "dependencies": {
+    "@firebase/app": "^0.10.5",
+    "@firebase/database": "^1.0.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -20,8 +22,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "predeploy" : "yarn build",
-    "deploy" : "gh-pages -d build",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build",
     "test": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
