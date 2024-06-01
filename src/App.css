@@ -31,7 +31,7 @@ html, body {
 
 .input-group {
   position: absolute;
-  bottom: 0;
+  bottom: -2px;
   display: flex;
   width: 100%;
 }
@@ -56,4 +56,18 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 0;
+  display: inline-block;
+  box-sizing: border-box;
+  font-size: x-large;
+}
+
+button[type=submit] {
+  padding: 12px 20px;
+  font-size: x-large;
 }
