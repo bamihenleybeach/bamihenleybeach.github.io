@@ -27,7 +27,7 @@ function App() {
               <div className="record">
                 <h2>Mark</h2>
                 {
-                  mode == 'admin' ? <button>Delivered</button> : null
+                  mode === 'admin' ? <button>Delivered</button> : null
                 }
               </div>
             </li>
@@ -35,7 +35,7 @@ function App() {
               <div className="record">
                 <h2>Mark</h2>
                 {
-                  mode == 'admin' ? <button>Delivered</button> : null
+                  mode === 'admin' ? <button>Delivered</button> : null
                 }
               </div>
             </li>
@@ -48,7 +48,7 @@ function App() {
               <div className="record">
                 <h2>Mark</h2>
                 {
-                  mode == 'admin' ? <button>Done</button> : null
+                  mode === 'admin' ? <button>Done</button> : null
                 }
               </div>
             </li>
@@ -56,7 +56,7 @@ function App() {
               <div className="record">
                 <h2>Mark</h2>
                 {
-                  mode == 'admin' ? <button onClick={onClickDone}>Done</button> : null
+                  mode === 'admin' ? <button onClick={onClickDone}>Done</button> : null
                 }
               </div>
             </li>
@@ -65,7 +65,7 @@ function App() {
         </div>
       </div>
       {
-        mode == 'admin' ? 
+        mode === 'admin' ? 
         <form onSubmit={onSubmitNewOrder}>
           <div className="input-group">
             <div className="customer-name-input">
