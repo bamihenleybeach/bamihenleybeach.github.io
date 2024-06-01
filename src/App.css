@@ -44,6 +44,7 @@ html, body {
   bottom: -2px;
   display: flex;
   width: 100%;
+  max-width: 1000px;
 }
 
 .customer-name-input {
