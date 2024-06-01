@@ -14,16 +14,16 @@ function App() {
     <div className="container">
       <div className="row">
         <div className="column">
-          <h1 className="title">DONE</h1>
-          <ul>
+          <h1 className="title done">DONE</h1>
+          <ul className="done">
             <li>
-              <div>
+              <div className="record">
                 <h2>Mark</h2>
                 <button>Delivered</button>
               </div>
             </li>
             <li>
-              <div>
+              <div className="record">
                 <h2>Mark</h2>
                 <button>Delivered</button>
               </div>
@@ -31,16 +31,16 @@ function App() {
           </ul>
         </div>
         <div className="column">
-          <h1 className="title">DOING</h1>
-          <ul>
+          <h1 className="title doing">DOING</h1>
+          <ul className="doing">
             <li>
-              <div>
+              <div className="record">
                 <h2>Mark</h2>
                 <button>Done</button>
               </div>
             </li>
             <li>
-              <div>
+              <div className="record">
                 <h2>Mark</h2>
                 <button onClick={onClickDone}>Done</button>
               </div>
@@ -54,7 +54,7 @@ function App() {
           <input id="customer-name" type="text" placeholder="Customer Name"/>
         </div>
         <div className="customer-name-button">
-          <button id="submit" type="submit">Add</button>
+          <button id="add-order" type="submit">Add</button>
         </div>
       </div>
     </div>
