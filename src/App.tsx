@@ -1,13 +1,17 @@
 import React, { useContext, useState } from 'react';
 import './App.css';
 import { AppContext } from './AppContext';
-import { writeVersion } from './utils/firebaseUtils';
+import { writeNewOrder, writeVersion } from './utils/firebaseUtils';
 
 function App() {
   const {state} = useContext(AppContext);
 
   const onClickDone = () => {
     writeVersion();
+  }
+
+  const onSubmitNewOrder = () => {
+    writeNewOrder(new Date().getTime());
   }
 
   return (
@@ -49,14 +53,16 @@ function App() {
         <i>{state.version}</i>
         </div>
       </div>
-      <div className="input-group">
-        <div className="customer-name-input">
-          <input id="customer-name" type="text" placeholder="Customer Name"/>
+      <form onSubmit={onSubmitNewOrder}>
+        <div className="input-group">
+          <div className="customer-name-input">
+            <input id="customer-name" type="text" placeholder="Customer Name"/>
+          </div>
+          <div className="customer-name-button">
+            <button id="add-order" type="submit">Add</button>
+          </div>
         </div>
-        <div className="customer-name-button">
-          <button id="add-order" type="submit">Add</button>
-        </div>
-      </div>
+      </form>
     </div>
   );
 }

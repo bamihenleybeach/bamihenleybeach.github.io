@@ -1,5 +1,13 @@
 import { initializeApp } from "@firebase/app";
-import { getDatabase, onValue, ref, set } from "@firebase/database";
+import {
+  child,
+  getDatabase,
+  onValue,
+  push,
+  ref,
+  set,
+  update,
+} from "@firebase/database";
 
 const firebaseConfig = {
   databaseURL: "https://henley-f45f3-default-rtdb.asia-southeast1.firebasedatabase.app",
@@ -25,7 +33,28 @@ const writeVersion = () => {
    });
 }
 
+
+
+function writeNewOrder(customerName) {
+  // A post entry.
+  const orderData = {
+    customerName,
+    status: 'NEW',
+  };
+
+  // Get a key for a new Post.
+  const newPostKey = push(child(ref(db), 'orders')).key;
+
+  // Write the new post's data simultaneously in the posts list and the user's post list.
+  const updates = {};
+  updates['/orders/' + newPostKey] = orderData;
+  // updates['/user-posts/' + uid + '/' + newPostKey] = orderData;
+
+  return update(ref(db), updates);
+}
+
 export {
-  writeVersion, 
   readVersion,
+  writeVersion,
+  writeNewOrder,
 }
