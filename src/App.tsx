@@ -54,7 +54,7 @@ function App() {
           <input id="customer-name" type="text" placeholder="Customer Name"/>
         </div>
         <div className="customer-name-button">
-          <button id="add-order" type="submit">Add</button>
+          <button id="add-order" type="submit">Doing</button>
         </div>
       </div>
     </div>
