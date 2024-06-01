@@ -52,6 +52,14 @@ function App() {
         <b>{state.version}</b>
         </div>
       </div>
+      <div className="input-group">
+        <div className="customer-name-input">
+          <input id="customer-name" type="text" placeholder="Customer Name"/>
+        </div>
+        <div className="customer-name-button">
+          <button id="submit" type="submit">Add</button>
+        </div>
+      </div>
     </div>
   );
 }
