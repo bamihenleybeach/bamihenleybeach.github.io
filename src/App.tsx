@@ -64,28 +64,21 @@ function App() {
         <i>{state.version}</i>
         </div>
       </div>
-<<<<<<< HEAD
-      <form onSubmit={onSubmitNewOrder}>
-=======
       {
         mode == 'admin' ? 
->>>>>>> 7e9acc8 (Update UI)
-        <div className="input-group">
-          <div className="customer-name-input">
-            <input id="customer-name" type="text" placeholder="Customer Name"/>
+        <form onSubmit={onSubmitNewOrder}>
+          <div className="input-group">
+            <div className="customer-name-input">
+              <input id="customer-name" type="text" placeholder="Customer Name"/>
+            </div>
+            <div className="customer-name-button">
+              <button id="add-order" type="submit">Doing</button>
+            </div>
           </div>
-          <div className="customer-name-button">
-<<<<<<< HEAD
-            <button id="add-order" type="submit">Add</button>
-          </div>
-        </div>
-      </form>
-=======
-            <button id="add-order" type="submit">Doing</button>
-          </div>
-        </div> : null
+        </form>
+        :
+        null
       }
->>>>>>> 7e9acc8 (Update UI)
     </div>
   );
 }
