@@ -27,6 +27,7 @@ html, body {
 
 .title {
   margin: 0;
+  padding: 10px;
 }
 
 .title.done {
