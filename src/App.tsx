@@ -1,7 +1,16 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import './App.css';
+import { AppContext } from './AppContext';
+import { writeVersion } from './utils/firebaseUtils';
 
 function App() {
+  const {state} = useContext(AppContext);
+
+  const onPressDone = () => {
+    console.log('here')
+    writeVersion();
+  }
+
   return (
     <div className="container">
       <div className="row">
@@ -28,7 +37,9 @@ function App() {
             <li>
               <div>
                 <h2>Mark</h2>
-                <button>Done</button>
+                <button onClick={() => {
+                  alert('213')
+                }}>Done</button>
               </div>
             </li>
             <li>
@@ -38,6 +49,7 @@ function App() {
               </div>
             </li>
           </ul>
+        <b>{state.version}</b>
         </div>
       </div>
     </div>
