@@ -21,12 +21,33 @@ html, body {
 /* Create two equal columns that sits next to each other */
 .column {
   flex: 50%;
-  padding: 10px;
-  height: 300px; /* Should be removed. Only for demonstration */
   border: 1px solid black;
   height: 100%;
 }
 
 .title {
   margin-top: 0;
+}
+
+.input-group {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  width: 100%;
+}
+
+.customer-name-input {
+  flex: 70%;
+}
+
+#customer-name {
+  width: 100%;
+}
+
+.customer-name-button {
+  flex: 30%;
+}
+
+#submit {
+  width: 100%;
 }
