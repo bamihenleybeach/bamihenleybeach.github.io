@@ -7,7 +7,7 @@ function App() {
   const params = new URLSearchParams(window.location.hash.replace('#', ''));
   const mode = params.get('mode');
   const {state} = useContext(AppContext);
-  console.log(mode)
+
   const onClickDone = () => {
     writeVersion();
   }
