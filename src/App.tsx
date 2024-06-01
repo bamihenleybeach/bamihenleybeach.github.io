@@ -12,6 +12,7 @@ function App() {
 
   const onSubmitNewOrder = () => {
     writeNewOrder(new Date().getTime());
+    writeVersion();
   }
 
   return (
