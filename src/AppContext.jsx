@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
-import { readVersion, writeVersion } from './utils/firebaseUtils';
+import { readOrders, readVersion, writeVersion } from './utils/firebaseUtils';
 import {un} from '@firebase/database'
 
 
@@ -10,8 +10,11 @@ export const AppProvider = ({children}) => {
 
   useEffect(() => {
     readVersion((data) => {
-      setState({version: data})
+      setState({...state, version: data})
     });
+    readOrders((data) => {
+      setState({...state, orders: data})
+    })
   }, [])
 
   return (

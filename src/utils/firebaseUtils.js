@@ -19,8 +19,8 @@ export const db = getDatabase(app);
 
 
 const readVersion = (onValueChange) => {
-  const starCountRef = ref(db, 'settings/version');
-  return onValue(starCountRef, (snapshot) => {
+  const myRef = ref(db, 'settings/version');
+  return onValue(myRef, (snapshot) => {
     const data = snapshot.val();
     onValueChange(data);
   });
@@ -33,7 +33,21 @@ const writeVersion = () => {
    });
 }
 
-
+const readOrders = (onValueChange) => {
+  const myRef = ref(db, 'orders');
+  return onValue(myRef, (snapshot) => {
+    const data = [];
+    snapshot.forEach((childSnapshot) => {
+      const childKey = childSnapshot.key;
+      const childData = childSnapshot.val();
+      data.push({
+        key: childKey,
+        ...childData,
+      });
+    });
+    onValueChange(data);
+  });
+}
 
 function writeNewOrder(customerName) {
   // A post entry.
@@ -56,5 +70,6 @@ function writeNewOrder(customerName) {
 export {
   readVersion,
   writeVersion,
+  readOrders,
   writeNewOrder,
 }

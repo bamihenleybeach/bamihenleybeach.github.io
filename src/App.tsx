@@ -6,7 +6,10 @@ import { writeNewOrder, writeVersion } from './utils/firebaseUtils';
 function App() {
   const params = new URLSearchParams(window.location.hash.replace('#', ''));
   const mode = params.get('mode');
-  const {state} = useContext(AppContext);
+    const {state: {
+        version,
+        orders
+    }} = useContext(AppContext);
   console.log(mode)
   const onClickDone = () => {
     writeVersion();
@@ -15,6 +18,10 @@ function App() {
   const onSubmitNewOrder = () => {
     writeNewOrder(new Date().getTime());
     writeVersion();
+  }
+
+  const renderList = () => {
+
   }
 
   return (
@@ -61,7 +68,7 @@ function App() {
               </div>
             </li>
           </ul>
-        <i>{state.version}</i>
+        <i>{version}</i>
         </div>
       </div>
       {
