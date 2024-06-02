@@ -41,7 +41,7 @@ function App() {
           <ul className="done">
             {
               filteredStatus('DONE').map((order:any) =>
-                <li>
+                <li key={order.key}>
                   <div className="record">
                     <h2>{order && order.customerName}</h2>
                     {
@@ -58,7 +58,7 @@ function App() {
           <ul className="doing">
             {
               filteredStatus('NEW').map((order:any) =>
-                <li>
+                <li key={order.key}>
                   <div className="record">
                     <h2>{order && order.customerName}</h2>
                     {
