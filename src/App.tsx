@@ -16,6 +16,11 @@ function App() {
   const mode = params.get('mode');
   const {orders} = useOrderModule();
 
+  const [openPopupDone, setOpenPopupDone] = useState(false);
+  const [openPopupDoing, setOpenPopupDoing] = useState(false);
+  const closeModalDone = () => setOpenPopupDone(false);
+  const closeModalDoing = () => setOpenPopupDoing(false);
+
   const onClickDone = (key: string) => {
     updateOrderStatus(key, "DONE");
   }
@@ -31,6 +36,8 @@ function App() {
       updateCustomerName(key, customerName);
       customerNameElm.value = '';
     }
+    closeModalDone();
+    closeModalDoing();
   }
 
   const onSubmitNewOrder = () => {
@@ -61,7 +68,11 @@ function App() {
                   <div className="record">
                     {
                       mode === 'admin' ?
-                      <Popup modal trigger={<h2>{order && order.customerName}</h2>}>
+                      <Popup modal
+                        open={openPopupDone}
+                        trigger={<h2>{order && order.customerName}</h2>}
+                        onClose={closeModalDone}
+                      >
                         <div className="input-group">
                           <div className="customer-name-input">
                             <input
@@ -100,7 +111,11 @@ function App() {
                   <div className="record">
                     {
                       mode === 'admin' ?
-                      <Popup modal trigger={<h2>{order && order.customerName}</h2>}>
+                      <Popup modal
+                        open={openPopupDoing}
+                        trigger={<h2>{order && order.customerName}</h2>}
+                        onClose={closeModalDoing}
+                      >
                         <div className="input-group">
                           <div className="customer-name-input">
                             <input
