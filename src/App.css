@@ -23,11 +23,15 @@ html, body {
   flex: 50%;
   border: 1px solid black;
   height: 100%;
+  overflow: scroll;
 }
 
 .title {
   margin: 0;
   padding: 10px;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
 }
 
 .title.done {
