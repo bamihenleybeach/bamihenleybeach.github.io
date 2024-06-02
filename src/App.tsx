@@ -14,7 +14,7 @@ function App() {
   } = useContext(AppContext);
 
   const onClickDone = () => {
-    updateOrderStatus(orders[0].key, "DONE");
+    updateOrderStatus(orders.find((v: any) => v.status === 'NEW').key, "DONE");
     writeVersion();
   }
 
