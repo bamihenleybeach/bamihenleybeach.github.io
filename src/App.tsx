@@ -19,8 +19,12 @@ function App() {
   }
 
   const onSubmitNewOrder = () => {
-    writeNewOrder(new Date().getTime());
-    writeVersion();
+    const customerNameElm = (document.getElementById('customer-name') as HTMLInputElement);
+    const customerName = customerNameElm ? customerNameElm.value : '';
+    if (customerName) {
+      writeNewOrder(customerName);
+      customerNameElm.value = '';
+    }
   }
 
   const renderList = () => {
