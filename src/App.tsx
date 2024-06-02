@@ -6,10 +6,11 @@ import { updateOrderStatus, writeNewOrder, writeVersion } from './utils/firebase
 function App() {
   const params = new URLSearchParams(window.location.hash.replace('#', ''));
   const mode = params.get('mode');
-  console.log(mode)
-
   const {
-    state: {version, orders},
+    state: {
+      version,
+      orders,
+    },
   } = useContext(AppContext);
 
   const onClickDone = () => {
@@ -26,49 +27,48 @@ function App() {
 
   }
 
+  const filteredStatus = (status: string) => {
+    if (orders) {
+      return orders.filter((o:any={}) => o && o.status === status);
+    }
+    return [];
+  }
+
   return (
     <div className="container">
       <div className="row">
         <div className="column">
           <h1 className="title done">DONE</h1>
           <ul className="done">
-            <li>
-              <div className="record">
-                <h2>Mark</h2>
-                {
-                  mode === 'admin' ? <button>Delivered</button> : null
-                }
-              </div>
-            </li>
-            <li>
-              <div className="record">
-                <h2>Mark</h2>
-                {
-                  mode === 'admin' ? <button>Delivered</button> : null
-                }
-              </div>
-            </li>
+            {
+              filteredStatus('DONE').map((order:any) =>
+                <li key={order.key}>
+                  <div className="record">
+                    <h2>{order && order.customerName}</h2>
+                    {
+                      mode === 'admin' ? <button>Delivered</button> : null
+                    }
+                  </div>
+                </li>
+              )
+            }
           </ul>
         </div>
         <div className="column">
           <h1 className="title doing">DOING</h1>
           <ul className="doing">
-            <li>
-              <div className="record">
-                <h2>Mark</h2>
-                {
-                  mode === 'admin' ? <button>Done</button> : null
-                }
-              </div>
-            </li>
-            <li>
-              <div className="record">
-                <h2>Mark</h2>
-                {
-                  mode === 'admin' ? <button onClick={onClickDone}>Done</button> : null
-                }
-              </div>
-            </li>
+            {
+              filteredStatus('NEW').map((order:any) =>
+                <li key={order.key}>
+                  <div className="record">
+                    <h2>{order && order.customerName}</h2>
+                    {
+                      mode === 'admin' ? <button onClick={onClickDone}>Done</button> : null
+                    }
+                  </div>
+                </li>
+              )
+            }
           </ul>
         <i>{version}</i>
         </div>
