@@ -15,10 +15,10 @@ function App() {
   const mode = params.get('mode');
   const {orders} = useOrderModule();
 
-  const [openPopupDone, setOpenPopupDone] = useState(false);
-  const [openPopupDoing, setOpenPopupDoing] = useState(false);
-  const closeModalDone = () => setOpenPopupDone(false);
-  const closeModalDoing = () => setOpenPopupDoing(false);
+  const [openPopup, setOpenPopup] = useState(false);
+  const [customerName, setCustomerName] = useState('');
+  const [customerKey, setCustomerKey] = useState('');
+  const closePopup = () => setOpenPopup(false);
 
   const onClickDone = (key: string) => {
     updateOrderStatus(key, "DONE");
@@ -28,24 +28,20 @@ function App() {
     deleteOrder(key);
   }
 
-  const onClickDoneChangeCustomerName = (key: string) => {
+  const onClickChangeCustomerName = (key: string) => {
     const customerNameElm = (document.getElementById('customer-name-edit-input') as HTMLInputElement);
     const customerName = customerNameElm ? customerNameElm.value : '';
     if (customerName) {
       updateCustomerName(key, customerName);
       customerNameElm.value = '';
     }
-    closeModalDone();
+    closePopup();
   }
 
-  const onClickDoingChangeCustomerName = (key: string) => {
-    const customerNameElm = (document.getElementById('customer-name-edit-input') as HTMLInputElement);
-    const customerName = customerNameElm ? customerNameElm.value : '';
-    if (customerName) {
-      updateCustomerName(key, customerName);
-      customerNameElm.value = '';
-    }
-    closeModalDoing();
+  const onClickOpenPopup = (key: string, customerName: string) => {
+    setCustomerName(customerName);
+    setCustomerKey(key);
+    setOpenPopup(true);
   }
 
   const onSubmitNewOrder = () => {
@@ -64,42 +60,12 @@ function App() {
     return [];
   }
 
-  const renderModal = (isModeDoing = true, order: any) => {
-    if (!openPopupDoing) {
-      return (
-        <div className="input-group">
-          <div className="customer-name-input">
-            <input
-              id="customer-name-edit-input"
-              type="text"
-              placeholder="Customer Name"
-              defaultValue={order.customerName}
-            />
-          </div>
-          <div className="customer-name-button">
-            <button
-              id="customer-name-edit-submit"
-              type="submit"
-              onClick={() => {
-                if (isModeDoing) {
-                  onClickDoingChangeCustomerName(order.key);
-                } else {
-                  onClickDoneChangeCustomerName(order.key);
-                }
-              }}
-            >
-              Change
-            </button>
-          </div>
-        </div>
-      );
-    }
-    return (
+  return (
+    <div className="container">
       <Popup
         modal
-        open={openPopupDone}
-        trigger={<h2>{order && order.customerName}</h2>}
-        onClose={closeModalDone}
+        open={openPopup}
+        onClose={closePopup}
       >
         <div className="input-group">
           <div className="customer-name-input">
@@ -107,7 +73,7 @@ function App() {
               id="customer-name-edit-input"
               type="text"
               placeholder="Customer Name"
-              defaultValue={order.customerName}
+              defaultValue={customerName}
             />
           </div>
           <div className="customer-name-button">
@@ -115,11 +81,7 @@ function App() {
               id="customer-name-edit-submit"
               type="submit"
               onClick={() => {
-                if (isModeDoing) {
-                  onClickDoingChangeCustomerName(order.key);
-                } else {
-                  onClickDoneChangeCustomerName(order.key)
-                }
+                onClickChangeCustomerName(customerKey);
               }}
             >
               Change
@@ -127,11 +89,6 @@ function App() {
           </div>
         </div>
       </Popup>
-    );
-  }
-
-  return (
-    <div className="container">
       <div className="row">
         <div className="column">
           <h1 className="title done">DONE</h1>
@@ -141,7 +98,10 @@ function App() {
                 <li key={order.key}>
                   <div className="record">
                     {
-                      mode === 'admin' ? renderModal(false, order) : <h2>{order && order.customerName}</h2>
+                      mode === 'admin' ?
+                      <h2 onClick={() => onClickOpenPopup(order.key, order.customerName)}>{order && order.customerName}</h2>
+                      :
+                      <h2>{order && order.customerName}</h2>
                     }
                     {
                       mode === 'admin' ?
@@ -164,25 +124,7 @@ function App() {
                   <div className="record">
                     {
                       mode === 'admin' ?
-                      <Popup modal
-                        open={openPopupDoing}
-                        trigger={<h2>{order && order.customerName}</h2>}
-                        onClose={closeModalDoing}
-                      >
-                        <div className="input-group">
-                          <div className="customer-name-input">
-                            <input
-                              id="customer-name-edit-input"
-                              type="text"
-                              placeholder="Customer Name"
-                              defaultValue={order.customerName}
-                            />
-                          </div>
-                          <div className="customer-name-button">
-                            <button id="customer-name-edit-submit" type="submit" onClick={() => onClickDoingChangeCustomerName(order.key)}>Change</button>
-                          </div>
-                        </div>
-                      </Popup>
+                      <h2 onClick={() => onClickOpenPopup(order.key, order.customerName)}>{order && order.customerName}</h2>
                       :
                       <h2>{order && order.customerName}</h2>
                     }
