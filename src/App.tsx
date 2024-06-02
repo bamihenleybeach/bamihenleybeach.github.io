@@ -9,15 +9,12 @@ import {
   deleteOrder,
   updateCustomerName,
 } from './utils/firebaseUtils';
+import { useOrderModule } from './useOrderModule';
 
 function App() {
   const params = new URLSearchParams(window.location.hash.replace('#', ''));
   const mode = params.get('mode');
-  const {
-    state: {
-      orders,
-    },
-  } = useContext(AppContext);
+  const {orders} = useOrderModule();
 
   const onClickDone = (key: string) => {
     updateOrderStatus(key, "DONE");
