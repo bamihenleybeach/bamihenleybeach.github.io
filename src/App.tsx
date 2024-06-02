@@ -1,15 +1,14 @@
-import React, { useContext, useState } from 'react';
+import { useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import './App.css';
-import { AppContext } from './AppContext';
+import { useOrderModule } from './useOrderModule';
 import {
-  updateOrderStatus,
-  writeNewOrder,
   deleteOrder,
   updateCustomerName,
+  updateOrderStatus,
+  writeNewOrder,
 } from './utils/firebaseUtils';
-import { useOrderModule } from './useOrderModule';
 
 function App() {
   const params = new URLSearchParams(window.location.hash.replace('#', ''));
@@ -65,6 +64,72 @@ function App() {
     return [];
   }
 
+  const renderModal = (isModeDoing = true, order: any) => {
+    if (!openPopupDoing) {
+      return (
+        <div className="input-group">
+          <div className="customer-name-input">
+            <input
+              id="customer-name-edit-input"
+              type="text"
+              placeholder="Customer Name"
+              defaultValue={order.customerName}
+            />
+          </div>
+          <div className="customer-name-button">
+            <button
+              id="customer-name-edit-submit"
+              type="submit"
+              onClick={() => {
+                if (isModeDoing) {
+                  onClickDoingChangeCustomerName(order.key);
+                } else {
+                  onClickDoneChangeCustomerName(order.key);
+                }
+              }}
+            >
+              Change
+            </button>
+          </div>
+        </div>
+      );
+    }
+    return (
+      <Popup
+        modal
+        open={openPopupDone}
+        trigger={<h2>{order && order.customerName}</h2>}
+        onClose={closeModalDone}
+      >
+        <div className="input-group">
+          <div className="customer-name-input">
+            <input
+              id="customer-name-edit-input"
+              type="text"
+              placeholder="Customer Name"
+              defaultValue={order.customerName}
+            />
+          </div>
+          <div className="customer-name-button">
+            <button
+              id="customer-name-edit-submit"
+              type="submit"
+              onClick={() => {
+                if (isModeDoing) {
+                  onClickDoingChangeCustomerName(order.key);
+                } else {
+                  onClickDoneChangeCustomerName(order.key)
+                }
+              }}
+            >
+              Change
+            </button>
+          </div>
+        </div>
+      </Popup>
+    );
+  }
+
   return (
     <div className="container">
       <div className="row">
@@ -76,28 +141,7 @@ function App() {
                 <li key={order.key}>
                   <div className="record">
                     {
-                      mode === 'admin' ?
-                      <Popup modal
-                        open={openPopupDone}
-                        trigger={<h2>{order && order.customerName}</h2>}
-                        onClose={closeModalDone}
-                      >
-                        <div className="input-group">
-                          <div className="customer-name-input">
-                            <input
-                              id="customer-name-edit-input"
-                              type="text"
-                              placeholder="Customer Name"
-                              defaultValue={order.customerName}
-                            />
-                          </div>
-                          <div className="customer-name-button">
-                            <button id="customer-name-edit-submit" type="submit" onClick={() => onClickDoneChangeCustomerName(order.key)}>Change</button>
-                          </div>
-                        </div>
-                      </Popup>
-                      :
-                      <h2>{order && order.customerName}</h2>
+                      mode === 'admin' ? renderModal(false, order) : <h2>{order && order.customerName}</h2>
                     }
                     {
                       mode === 'admin' ?
