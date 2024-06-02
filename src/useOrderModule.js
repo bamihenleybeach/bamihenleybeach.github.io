@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { readOrders } from './utils/firebaseUtils';
 
 
@@ -6,9 +6,13 @@ export const useOrderModule = () => {
   const [state, setState] = useState({});
 
   useEffect(() => {
-    readOrders((data) => {
+    const unsubscribe = readOrders((data) => {
       setState({orders: data})
-    })
+    });
+    return () => {
+      console.log('Clean up the subscription.')
+      unsubscribe();
+    }
   }, [])
 
   return {
