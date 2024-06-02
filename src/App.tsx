@@ -67,23 +67,31 @@ function App() {
               filteredStatus('DONE').map((order:any) =>
                 <li key={order.key}>
                   <div className="record">
-                    <Popup modal trigger={<h2 >{order && order.customerName}</h2>}>
-                      <div className="input-group">
-                        <div className="customer-name-input">
-                          <input
-                            id="customer-name-edit-input"
-                            type="text"
-                            placeholder="Customer Name"
-                            defaultValue={order.customerName}
-                          />
-                        </div>
-                        <div className="customer-name-button">
-                          <button id="customer-name-edit-submit" type="submit" onClick={() => onClickChangeCustomerName(order.key)}>Change</button>
-                        </div>
-                      </div>
-                    </Popup>
                     {
-                      mode === 'admin' ? <button onClick={() => onClickDelivered(order && order.key)}>Delivered</button> : null
+                      mode === 'admin' ?
+                      <Popup modal trigger={<h2>{order && order.customerName}</h2>}>
+                        <div className="input-group">
+                          <div className="customer-name-input">
+                            <input
+                              id="customer-name-edit-input"
+                              type="text"
+                              placeholder="Customer Name"
+                              defaultValue={order.customerName}
+                            />
+                          </div>
+                          <div className="customer-name-button">
+                            <button id="customer-name-edit-submit" type="submit" onClick={() => onClickChangeCustomerName(order.key)}>Change</button>
+                          </div>
+                        </div>
+                      </Popup>
+                      :
+                      <h2>{order && order.customerName}</h2>
+                    }
+                    {
+                      mode === 'admin' ?
+                      <button onClick={() => onClickDelivered(order && order.key)}>Delivered</button>
+                      :
+                      null
                     }
                   </div>
                 </li>
@@ -98,23 +106,31 @@ function App() {
               filteredStatus('NEW').map((order:any) =>
                 <li key={order.key}>
                   <div className="record">
-                    <Popup modal trigger={<h2 >{order && order.customerName}</h2>}>
-                      <div className="input-group">
-                        <div className="customer-name-input">
-                          <input
-                            id="customer-name-edit-input"
-                            type="text"
-                            placeholder="Customer Name"
-                            defaultValue={order.customerName}
-                          />
-                        </div>
-                        <div className="customer-name-button">
-                          <button id="customer-name-edit-submit" type="submit" onClick={() => onClickChangeCustomerName(order.key)}>Change</button>
-                        </div>
-                      </div>
-                    </Popup>
                     {
-                      mode === 'admin' ? <button onClick={() => onClickDone(order && order.key)}>Done</button> : null
+                      mode === 'admin' ?
+                      <Popup modal trigger={<h2>{order && order.customerName}</h2>}>
+                        <div className="input-group">
+                          <div className="customer-name-input">
+                            <input
+                              id="customer-name-edit-input"
+                              type="text"
+                              placeholder="Customer Name"
+                              defaultValue={order.customerName}
+                            />
+                          </div>
+                          <div className="customer-name-button">
+                            <button id="customer-name-edit-submit" type="submit" onClick={() => onClickChangeCustomerName(order.key)}>Change</button>
+                          </div>
+                        </div>
+                      </Popup>
+                      :
+                      <h2>{order && order.customerName}</h2>
+                    }
+                    {
+                      mode === 'admin' ?
+                      <button onClick={() => onClickDone(order && order.key)}>Done</button>
+                      :
+                      null
                     }
                   </div>
                 </li>
