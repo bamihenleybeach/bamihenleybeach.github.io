@@ -72,48 +72,17 @@ const writeNewOrder = (customerName) => {
 }
 
 const updateCustomerName = (key, newCustomerName) => {
-  const dbRef = ref(getDatabase());
-  return get(child(dbRef, `orders/${key}`)).then((snapshot) => {
-    if (snapshot.exists()) {
-      const data = snapshot.val();
-      return set(ref(db, `orders/${key}`), {
-        ...data,
-        customerName: newCustomerName,
-        updatedDate: new Date(),
-      });
-    } else {
-      console.log("No data available");
-    }
-  })
+  return set(ref(db, `orders/${key}/customerName`), newCustomerName);
 }
 
 const updateOrderStatus = async (key, status) => {
-  const dbRef = ref(getDatabase());
-  return get(child(dbRef, `orders/${key}`)).then((snapshot) => {
-    if (snapshot.exists()) {
-      const data = snapshot.val();
-      return set(ref(db, `orders/${key}`), {
-        ...data,
-        status,
-        updatedDate: new Date(),
-      });
-    } else {
-      console.log("No data available");
-    }
-  })
+  return set(ref(db, `orders/${key}/status`), status);
 }
 
 const deleteOrder = (key) => {
-  const dbRef = ref(getDatabase());
-  return get(child(dbRef, `orders/${key}`)).then((snapshot) => {
-    if (snapshot.exists()) {
-      const updates = {};
-      updates['/orders/' + key] = null;
-      return update(ref(db), updates);
-    } else {
-      console.log("No data available");
-    }
-  });
+  const updates = {};
+  updates['/orders/' + key] = null;
+  return update(ref(db), updates);
 }
 
 export {

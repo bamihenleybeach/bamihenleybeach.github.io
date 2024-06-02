@@ -6,7 +6,6 @@ import { AppContext } from './AppContext';
 import {
   updateOrderStatus,
   writeNewOrder,
-  writeVersion,
   deleteOrder,
   updateCustomerName,
 } from './utils/firebaseUtils';
@@ -16,19 +15,16 @@ function App() {
   const mode = params.get('mode');
   const {
     state: {
-      version,
       orders,
     },
   } = useContext(AppContext);
 
   const onClickDone = (key: string) => {
     updateOrderStatus(key, "DONE");
-    writeVersion();
   }
 
   const onClickDelivered = (key: string) => {
     deleteOrder(key);
-    writeVersion();
   }
 
   const onClickChangeCustomerName = (key: string) => {
@@ -36,7 +32,6 @@ function App() {
     const customerName = customerNameElm ? customerNameElm.value : '';
     if (customerName) {
       updateCustomerName(key, customerName);
-      writeVersion();
       customerNameElm.value = '';
     }
   }
@@ -137,7 +132,6 @@ function App() {
               )
             }
           </ul>
-        <i>{version}</i>
         </div>
       </div>
       {
