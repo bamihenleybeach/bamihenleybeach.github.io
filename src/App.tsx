@@ -1,4 +1,6 @@
 import React, { useContext, useState } from 'react';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
 import './App.css';
 import { AppContext } from './AppContext';
 import {
@@ -6,6 +8,7 @@ import {
   writeNewOrder,
   writeVersion,
   deleteOrder,
+  updateCustomerName,
 } from './utils/firebaseUtils';
 
 function App() {
@@ -28,6 +31,16 @@ function App() {
     writeVersion();
   }
 
+  const onClickChangeCustomerName = (key: string) => {
+    const customerNameElm = (document.getElementById('customer-name-edit-input') as HTMLInputElement);
+    const customerName = customerNameElm ? customerNameElm.value : '';
+    if (customerName) {
+      updateCustomerName(key, customerName);
+      writeVersion();
+      customerNameElm.value = '';
+    }
+  }
+
   const onSubmitNewOrder = () => {
     const customerNameElm = (document.getElementById('customer-name') as HTMLInputElement);
     const customerName = customerNameElm ? customerNameElm.value : '';
@@ -35,10 +48,6 @@ function App() {
       writeNewOrder(customerName);
       customerNameElm.value = '';
     }
-  }
-
-  const renderList = () => {
-
   }
 
   const filteredStatus = (status: string) => {
@@ -58,7 +67,21 @@ function App() {
               filteredStatus('DONE').map((order:any) =>
                 <li key={order.key}>
                   <div className="record">
-                    <h2>{order && order.customerName}</h2>
+                    <Popup modal trigger={<h2 >{order && order.customerName}</h2>}>
+                      <div className="input-group">
+                        <div className="customer-name-input">
+                          <input
+                            id="customer-name-edit-input"
+                            type="text"
+                            placeholder="Customer Name"
+                            defaultValue={order.customerName}
+                          />
+                        </div>
+                        <div className="customer-name-button">
+                          <button id="customer-name-edit-submit" type="submit" onClick={() => onClickChangeCustomerName(order.key)}>Change</button>
+                        </div>
+                      </div>
+                    </Popup>
                     {
                       mode === 'admin' ? <button onClick={() => onClickDelivered(order && order.key)}>Delivered</button> : null
                     }
@@ -75,7 +98,21 @@ function App() {
               filteredStatus('NEW').map((order:any) =>
                 <li key={order.key}>
                   <div className="record">
-                    <h2>{order && order.customerName}</h2>
+                    <Popup modal trigger={<h2 >{order && order.customerName}</h2>}>
+                      <div className="input-group">
+                        <div className="customer-name-input">
+                          <input
+                            id="customer-name-edit-input"
+                            type="text"
+                            placeholder="Customer Name"
+                            defaultValue={order.customerName}
+                          />
+                        </div>
+                        <div className="customer-name-button">
+                          <button id="customer-name-edit-submit" type="submit" onClick={() => onClickChangeCustomerName(order.key)}>Change</button>
+                        </div>
+                      </div>
+                    </Popup>
                     {
                       mode === 'admin' ? <button onClick={() => onClickDone(order && order.key)}>Done</button> : null
                     }

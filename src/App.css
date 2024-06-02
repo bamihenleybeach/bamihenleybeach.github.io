@@ -55,7 +55,7 @@ html, body {
   flex: 70%;
 }
 
-#customer-name {
+#customer-name, #customer-name-edit-input {
   width: 100%;
 }
 
@@ -79,7 +79,7 @@ input[type=text] {
   font-size: x-large;
 }
 
-#add-order {
+#add-order, #customer-name-edit-submit {
   padding: 12px 20px;
   font-size: x-large;
   width: 100%;
@@ -127,3 +127,6 @@ ul.done li button {
   color: white;
 }
 
+.popup-content {
+  padding: 0;
+}
