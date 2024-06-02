@@ -86,6 +86,13 @@ input[type=text] {
   padding: 12px 20px;
   font-size: x-large;
   width: 100%;
+}
+
+#add-order {
+  background: orange;
+}
+
+#customer-name-edit-submit {
   background: blue;
   color: white;
 }
@@ -114,11 +121,12 @@ ul li:last-child {
 }
 
 ul.doing li button {
-  background: orange;
+  background: green;
+  color: white;
 }
 
 ul.done li button {
-  background: green;
+  background: red;
   color: white;
 }
 
