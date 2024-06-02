@@ -1,6 +1,7 @@
 import { initializeApp } from "@firebase/app";
 import {
   child,
+  get,
   getDatabase,
   onValue,
   push,
@@ -49,11 +50,14 @@ const readOrders = (onValueChange) => {
   });
 }
 
-function writeNewOrder(customerName) {
+const writeNewOrder = (customerName) => {
   // A post entry.
+  const createdDate = new Date();
   const orderData = {
     customerName,
     status: 'NEW',
+    createdDate,
+    updatedDate: createdDate,
   };
 
   // Get a key for a new Post.
@@ -67,9 +71,35 @@ function writeNewOrder(customerName) {
   return update(ref(db), updates);
 }
 
+const updateCustomerName = (key, newCustomerName) => {
+}
+
+const updateOrderStatus = async (key, status) => {
+  const dbRef = ref(getDatabase());
+  return get(child(dbRef, `orders/${key}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      const data = snapshot.val();
+      return set(ref(db, `orders/${key}`), {
+        ...data,
+        status,
+        updatedDate: new Date(),
+      });
+    } else {
+      console.log("No data available");
+    }
+  })
+}
+
+const deleteOrder = () => {
+
+}
+
 export {
   readVersion,
   writeVersion,
   readOrders,
   writeNewOrder,
+  updateCustomerName,
+  updateOrderStatus,
+  deleteOrder,
 }

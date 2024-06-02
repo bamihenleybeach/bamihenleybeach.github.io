@@ -1,17 +1,19 @@
 import React, { useContext, useState } from 'react';
 import './App.css';
 import { AppContext } from './AppContext';
-import { writeNewOrder, writeVersion } from './utils/firebaseUtils';
+import { updateOrderStatus, writeNewOrder, writeVersion } from './utils/firebaseUtils';
 
 function App() {
   const params = new URLSearchParams(window.location.hash.replace('#', ''));
   const mode = params.get('mode');
-    const {state: {
-        version,
-        orders
-    }} = useContext(AppContext);
   console.log(mode)
+
+  const {
+    state: {version, orders},
+  } = useContext(AppContext);
+
   const onClickDone = () => {
+    updateOrderStatus(orders[0].key, "DONE");
     writeVersion();
   }
 
