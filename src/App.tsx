@@ -29,7 +29,7 @@ function App() {
     deleteOrder(key);
   }
 
-  const onClickChangeCustomerName = (key: string) => {
+  const onClickDoneChangeCustomerName = (key: string) => {
     const customerNameElm = (document.getElementById('customer-name-edit-input') as HTMLInputElement);
     const customerName = customerNameElm ? customerNameElm.value : '';
     if (customerName) {
@@ -37,6 +37,15 @@ function App() {
       customerNameElm.value = '';
     }
     closeModalDone();
+  }
+
+  const onClickDoingChangeCustomerName = (key: string) => {
+    const customerNameElm = (document.getElementById('customer-name-edit-input') as HTMLInputElement);
+    const customerName = customerNameElm ? customerNameElm.value : '';
+    if (customerName) {
+      updateCustomerName(key, customerName);
+      customerNameElm.value = '';
+    }
     closeModalDoing();
   }
 
@@ -83,7 +92,7 @@ function App() {
                             />
                           </div>
                           <div className="customer-name-button">
-                            <button id="customer-name-edit-submit" type="submit" onClick={() => onClickChangeCustomerName(order.key)}>Change</button>
+                            <button id="customer-name-edit-submit" type="submit" onClick={() => onClickDoneChangeCustomerName(order.key)}>Change</button>
                           </div>
                         </div>
                       </Popup>
@@ -126,7 +135,7 @@ function App() {
                             />
                           </div>
                           <div className="customer-name-button">
-                            <button id="customer-name-edit-submit" type="submit" onClick={() => onClickChangeCustomerName(order.key)}>Change</button>
+                            <button id="customer-name-edit-submit" type="submit" onClick={() => onClickDoingChangeCustomerName(order.key)}>Change</button>
                           </div>
                         </div>
                       </Popup>
