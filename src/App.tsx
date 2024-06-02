@@ -13,8 +13,8 @@ function App() {
     },
   } = useContext(AppContext);
 
-  const onClickDone = () => {
-    updateOrderStatus(orders.find((v: any) => v.status === 'NEW').key, "DONE");
+  const onClickDone = (key: string) => {
+    updateOrderStatus(key, "DONE");
     writeVersion();
   }
 
@@ -67,7 +67,7 @@ function App() {
                   <div className="record">
                     <h2>{order && order.customerName}</h2>
                     {
-                      mode === 'admin' ? <button onClick={onClickDone}>Done</button> : null
+                      mode === 'admin' ? <button onClick={() => onClickDone(order && order.key)}>Done</button> : null
                     }
                   </div>
                 </li>
