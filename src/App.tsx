@@ -1,7 +1,12 @@
 import React, { useContext, useState } from 'react';
 import './App.css';
 import { AppContext } from './AppContext';
-import { updateOrderStatus, writeNewOrder, writeVersion } from './utils/firebaseUtils';
+import {
+  updateOrderStatus,
+  writeNewOrder,
+  writeVersion,
+  deleteOrder,
+} from './utils/firebaseUtils';
 
 function App() {
   const params = new URLSearchParams(window.location.hash.replace('#', ''));
@@ -15,6 +20,11 @@ function App() {
 
   const onClickDone = (key: string) => {
     updateOrderStatus(key, "DONE");
+    writeVersion();
+  }
+
+  const onClickDelivered = (key: string) => {
+    deleteOrder(key);
     writeVersion();
   }
 
@@ -50,7 +60,7 @@ function App() {
                   <div className="record">
                     <h2>{order && order.customerName}</h2>
                     {
-                      mode === 'admin' ? <button>Delivered</button> : null
+                      mode === 'admin' ? <button onClick={() => onClickDelivered(order && order.key)}>Delivered</button> : null
                     }
                   </div>
                 </li>

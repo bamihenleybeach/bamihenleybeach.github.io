@@ -90,8 +90,17 @@ const updateOrderStatus = async (key, status) => {
   })
 }
 
-const deleteOrder = () => {
-
+const deleteOrder = (key) => {
+  const dbRef = ref(getDatabase());
+  return get(child(dbRef, `orders/${key}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      const updates = {};
+      updates['/orders/' + key] = null;
+      return update(ref(db), updates);
+    } else {
+      console.log("No data available");
+    }
+  });
 }
 
 export {
