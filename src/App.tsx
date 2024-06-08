@@ -91,7 +91,7 @@ function App() {
       </Popup>
       <div className="row">
         <div className="column">
-          <h1 className="title done">DONE</h1>
+          <h1 className="title done">Order Ready To Collect</h1>
           <ul className="done">
             {
               filteredStatus('DONE').map((order:any) =>
@@ -116,7 +116,7 @@ function App() {
           </ul>
         </div>
         <div className="column">
-          <h1 className="title doing">DOING</h1>
+          <h1 className="title doing">Preparing Order Number</h1>
           <ul className="doing">
             {
               filteredStatus('NEW').map((order:any) =>
