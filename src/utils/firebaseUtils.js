@@ -1,4 +1,5 @@
-import { initializeApp } from "@firebase/app";
+import { initializeApp } from '@firebase/app';
+import { getAnalytics } from 'firebase/analytics';
 import {
   child,
   // get,
@@ -8,16 +9,23 @@ import {
   ref,
   set,
   update,
-} from "@firebase/database";
+} from '@firebase/database';
 
 const firebaseConfig = {
-  databaseURL: "https://henley-f45f3-default-rtdb.asia-southeast1.firebasedatabase.app",
+  apiKey: 'AIzaSyA3OFpaKU8cmYxfGrRRPSyU3wqQtj0kDeA',
+  // authDomain: 'henley-f45f3.firebaseapp.com',
+  authDomain: 'bamihenleybeach.github.io',
+  databaseURL: 'https://henley-f45f3-default-rtdb.asia-southeast1.firebasedatabase.app',
+  projectId: 'henley-f45f3',
+  storageBucket: 'henley-f45f3.appspot.com',
+  messagingSenderId: '516130321206',
+  appId: '1:516130321206:web:8787d52e079fce2a177997',
+  measurementId: 'G-FNKC8YEN60',
 };
 
 const app = initializeApp(firebaseConfig);
 
 export const db = getDatabase(app);
-
 
 const readVersion = (onValueChange) => {
   const myRef = ref(db, 'settings/version');
@@ -29,7 +37,7 @@ const readVersion = (onValueChange) => {
 
 const writeVersion = () => {
  return set(
-   ref(db, "settings"), {
+   ref(db, 'settings'), {
      version: new Date().toISOString(),
    });
 }

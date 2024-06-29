@@ -26,6 +26,10 @@ html, body {
   overflow: scroll;
 }
 
+.column img {
+  width: 100%;
+}
+
 .title {
   margin: 0;
   padding: 10px;

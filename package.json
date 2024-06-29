@@ -5,6 +5,7 @@
   "homepage": "http://bamihenleybeach.github.io",
   "dependencies": {
     "@firebase/app": "^0.10.5",
+    "@firebase/auth": "^1.7.4",
     "@firebase/database": "^1.0.5",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

@@ -4,16 +4,29 @@ import 'reactjs-popup/dist/index.css';
 import './App.css';
 import { useOrderModule } from './useOrderModule';
 import {
+  // readVersion,
   deleteOrder,
   updateCustomerName,
   updateOrderStatus,
   writeNewOrder,
 } from './utils/firebaseUtils';
+import {
+  initAuth,
+  // createUser,
+  // login,
+} from './utils/auth';
 
 function App() {
+  // readVersion((v: string) => {
+  //   console.log(v);
+  // });
   const params = new URLSearchParams(window.location.hash.replace('#', ''));
   const mode = params.get('mode');
   const {orders} = useOrderModule();
+
+  if (mode === 'admin') {
+    initAuth();
+  }
 
   const [openPopup, setOpenPopup] = useState(false);
   const [customerName, setCustomerName] = useState('');
@@ -140,6 +153,9 @@ function App() {
             }
           </ul>
         </div>
+        {/*<div className="column">
+          <img alt="New App" src="/propose/new-app.jpg"/>
+        </div>*/}
       </div>
       {
         mode === 'admin' ? 
